@@ -484,6 +484,7 @@ results = {}
 
 
 async def check_token(token):
+
     global last_time_check
     global results
 
@@ -512,10 +513,14 @@ async def check_token(token):
     print(f'The checking took {round(time.time() - start_time, 1)} seconds')
     return await create_response(results, token)
 
+def main ():
 
-token_info = asyncio.run(check_token('ETH'))
-response = '\n\n'.join(token_info)
-if response == '':
-    print("There isn't a token with this ticker on available exchanges")
-else:
-    print(response)
+    token = input('Write token ticker: ').upper()
+    token_info = asyncio.run(check_token(token))
+    response = '\n\n'.join(token_info)
+    if response == '':
+        print("There isn't a token with this ticker on available exchanges")
+    else:
+        print(response)
+
+main()
